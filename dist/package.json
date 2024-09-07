@@ -2,5 +2,10 @@
   "name": "jsr-dlx",
   "version": "0.0.1",
   "type": "module",
-  "bin": "node ./mod.js"
+  "bin": "node ./mod.js",
+  "author": "Benjamin Wilkins",
+  "license": "MIT",
+  "keywords": ["JSR", "cli"],
+  "repository": "https://gitlab.com/benjamin-wilkins/jsr-dlx",
+  "readme": "https://gitlab.com/benjamin-wilkins/jsr-dlx"
 }
