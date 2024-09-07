@@ -1,0 +1,6 @@
+{
+  "name": "jsr-dlx",
+  "version": "0.0.1",
+  "type": "module",
+  "bin": "node ./mod.js"
+}
