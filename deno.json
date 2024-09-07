@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "build": "deno run -A build.ts",
+    "run": "deno task build && node ./dist/mod.js"
+  },
+  "imports": {
+    "@cross/runtime": "jsr:@cross/runtime",
+    "@cross/fs": "jsr:@cross/fs",
+    "@cross/fs/stat": "jsr:@cross/fs/stat",
+    "jsr:@cross/utils": "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/mod.ts"
+  }
+}
