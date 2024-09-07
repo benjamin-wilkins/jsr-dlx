@@ -2,7 +2,7 @@
   "tasks": {
     "build": "deno run -A build.ts",
     "run": "deno task build && node ./dist/mod.js",
-    "publish": "deno task build && npm publish dist"
+    "publish": "deno task build && cd dist && npm publish"
   },
   "imports": {
     "@cross/runtime": "jsr:@cross/runtime",

@@ -1,6 +1,6 @@
 {
   "name": "jsr-dlx",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "bin": "node ./mod.js",
   "author": "Benjamin Wilkins",
