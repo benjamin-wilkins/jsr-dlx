@@ -6,7 +6,8 @@ A basic utility for runnning JSR packages under Node on the command line. Based 
 of `yarn dlx` and `deno run`.
 
 ```sh
-npx jsr-dlx [PACKAGE]
+npx jsr-dlx [PACKAGE] [ARGS?]
+bunx --bun jsr-dlx [PACKAGE] [ARGS?]
 ```
 
 Essentially, `jsr-dlx` calls `npx jsr` to install the package to a temporary directory (the name

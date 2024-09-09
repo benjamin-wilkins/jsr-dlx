@@ -1,6 +1,7 @@
 import { join, join as joinPath } from "jsr:@std/path"
 import { DirectoryTypes, dir } from "jsr:@cross/dir@^1"
 import { readFile, writeFile, exists, mktempdir, mkdir, which } from "jsr:@cross/fs@^0.1"
+import { getCurrentRuntime, Runtime } from "jsr:@cross/runtime@1"
 import { spawn } from "jsr:@cross/utils@^0.15"
 
 import { log } from "./log.ts"
@@ -65,8 +66,14 @@ export class Resolver {
   
     log(`Installing ${pkg} in ${installDir}`)
 
+    const command: string[] = getCurrentRuntime() === Runtime.Bun
+    ? [await which("bunx") ?? "bunx", "jsr", "add", pkg]
+    : [await which("npx") ?? "npx", "jsr", "add", pkg]
+
+    console.log(command)
+
     const { code } = await spawn(
-      [await which("npx") ?? "npx", "jsr", "add", pkg],
+      command,
       {},
       installDir,
       {stdin: "inherit", stdout: "inherit", stderr: "inherit"}

@@ -2,14 +2,81 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "jsr:@cross/deepmerge@^1.0.0": "jsr:@cross/deepmerge@1.0.0",
+      "jsr:@cross/dir@^1": "jsr:@cross/dir@1.1.0",
+      "jsr:@cross/dir@^1.1.0": "jsr:@cross/dir@1.1.0",
+      "jsr:@cross/env@^1.0.0": "jsr:@cross/env@1.0.2",
+      "jsr:@cross/fs@^0.1": "jsr:@cross/fs@0.1.11",
+      "jsr:@cross/fs@^0.1.11": "jsr:@cross/fs@0.1.11",
+      "jsr:@cross/runtime@^1.0.0": "jsr:@cross/runtime@1.1.0",
+      "jsr:@cross/utils@0.16": "jsr:@cross/utils@0.16.0",
+      "jsr:@cross/utils@^0.15": "jsr:@cross/utils@0.15.0",
+      "jsr:@cross/utils@^0.7.0": "jsr:@cross/utils@0.7.1",
       "jsr:@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@0.10.3",
       "jsr:@std/assert@^0.213.1": "jsr:@std/assert@0.213.1",
+      "jsr:@std/assert@^0.224.0": "jsr:@std/assert@0.224.0",
+      "jsr:@std/cli": "jsr:@std/cli@1.0.5",
       "jsr:@std/encoding@0.213": "jsr:@std/encoding@0.213.1",
       "jsr:@std/jsonc@0.213": "jsr:@std/jsonc@0.213.1",
+      "jsr:@std/path": "jsr:@std/path@1.0.4",
       "jsr:@std/path@0.213": "jsr:@std/path@0.213.1",
+      "jsr:@std/path@^0.224.0": "jsr:@std/path@0.224.0",
+      "jsr:@vef/color-me": "jsr:@vef/color-me@1.0.3",
+      "jsr:@vef/color-me@1": "jsr:@vef/color-me@1.0.3",
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:esbuild": "npm:esbuild@0.23.1"
     },
     "jsr": {
+      "@cross/deepmerge@1.0.0": {
+        "integrity": "1e1318a74e31ba1959b9aa0acae8bd417b806f74ffd25ac07c90e12f83ad6b1d"
+      },
+      "@cross/dir@1.1.0": {
+        "integrity": "41eb779daf160f53bc33ef91f593f332fffc52ec9b81f87178db564718534e59",
+        "dependencies": [
+          "jsr:@cross/env@^1.0.0",
+          "jsr:@cross/runtime@^1.0.0",
+          "jsr:@cross/utils@^0.7.0"
+        ]
+      },
+      "@cross/env@1.0.2": {
+        "integrity": "28501ad1043c218a5b00fe5db27ec62c01ab16371bbe1b9d738496f0a7c5eeb8",
+        "dependencies": [
+          "jsr:@cross/deepmerge@^1.0.0",
+          "jsr:@cross/runtime@^1.0.0"
+        ]
+      },
+      "@cross/fs@0.1.11": {
+        "integrity": "88fdde19a5c0b5517ccd1bf087a2cdae8f4e9acbd54b9688f5332af574b49f7d",
+        "dependencies": [
+          "jsr:@cross/dir@^1.1.0",
+          "jsr:@cross/env@^1.0.0",
+          "jsr:@cross/runtime@^1.0.0",
+          "jsr:@std/path@^0.224.0"
+        ]
+      },
+      "@cross/runtime@1.1.0": {
+        "integrity": "f35a3b768a9de125277329483b684062ffc9ee86f4449cb8b3d614adcad64ffb"
+      },
+      "@cross/utils@0.15.0": {
+        "integrity": "e16f224f785a3c0938dfcfb7f6e2048eba2dad162c10bf1d23a91d84d9443595",
+        "dependencies": [
+          "jsr:@cross/fs@^0.1.11",
+          "jsr:@cross/runtime@^1.0.0"
+        ]
+      },
+      "@cross/utils@0.16.0": {
+        "integrity": "c6333cafd9be41a04c449655120989b8f3601322f7344db30f9d00eef7bc942f",
+        "dependencies": [
+          "jsr:@cross/fs@^0.1.11",
+          "jsr:@cross/runtime@^1.0.0"
+        ]
+      },
+      "@cross/utils@0.7.1": {
+        "integrity": "6cc50ad31b0904364188c43d10e3d4888d817a3d415528b014c27deb8a35564e",
+        "dependencies": [
+          "jsr:@cross/runtime@^1.0.0"
+        ]
+      },
       "@luca/esbuild-deno-loader@0.10.3": {
         "integrity": "32fc93f7e7f78060234fd5929a740668aab1c742b808c6048b57f9aaea514921",
         "dependencies": [
@@ -20,6 +87,12 @@
       },
       "@std/assert@0.213.1": {
         "integrity": "24c28178b30c8e0782c18e8e94ea72b16282207569cdd10ffb9d1d26f2edebfe"
+      },
+      "@std/assert@0.224.0": {
+        "integrity": "8643233ec7aec38a940a8264a6e3eed9bfa44e7a71cc6b3c8874213ff401967f"
+      },
+      "@std/cli@1.0.5": {
+        "integrity": "c93cce26ffd26f617c15a12874e1bfeabc90b1eee86017c9639093734c2bf587"
       },
       "@std/encoding@0.213.1": {
         "integrity": "fcbb6928713dde941a18ca5db88ca1544d0755ec8fb20fe61e2dc8144b390c62"
@@ -35,6 +108,18 @@
         "dependencies": [
           "jsr:@std/assert@^0.213.1"
         ]
+      },
+      "@std/path@0.224.0": {
+        "integrity": "55bca6361e5a6d158b9380e82d4981d82d338ec587de02951e2b7c3a24910ee6",
+        "dependencies": [
+          "jsr:@std/assert@^0.224.0"
+        ]
+      },
+      "@std/path@1.0.4": {
+        "integrity": "48dd5d8389bcfcd619338a01bdf862cb7799933390146a54ae59356a0acc7105"
+      },
+      "@vef/color-me@1.0.3": {
+        "integrity": "d5cc64c4b15518f3a5e4f3acdc2ed7d8335b7773097d4c692210e8a2fd84e91c"
       }
     },
     "npm": {
@@ -132,6 +217,10 @@
       },
       "@esbuild/win32-x64@0.23.1": {
         "integrity": "sha512-BHpFFeslkWrXWyUPnbKm+xYYVYruCinGcftSBaa8zoF9hZO4BcSCFUvHVTtzpIY6YzUnYtuEhZ+C9iEXjxnasg==",
+        "dependencies": {}
+      },
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
         "dependencies": {}
       },
       "esbuild@0.23.1": {

@@ -1,8 +1,7 @@
 #! /usr/bin/env node
 
 import { parseArgs } from "jsr:@std/cli/parse-args"
-import { which } from "jsr:@cross/fs@0.1"
-import { args, spawn, exit } from "jsr:@cross/utils@0.15"
+import { args, spawn, exit, execPath } from "jsr:@cross/utils@0.16"
 import { colorMe } from "jsr:@vef/color-me@1";
 
 import { Resolver } from "./resolver.ts"
@@ -25,7 +24,7 @@ await resolver.writeCache()
 log("Running", colorMe.brightCyan(entryPoint), "from", colorMe.brightCyan(String(pkg)))
 
 await spawn(
-  [await which("node") ?? "node", String(entryPoint), ...childArgs.map(String)],
+  [execPath(), String(entryPoint), ...childArgs.map(String)],
   {},
   undefined,
   {stdin: "inherit", stdout: "inherit", stderr: "inherit"}
