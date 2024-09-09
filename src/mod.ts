@@ -3,8 +3,10 @@
 import { parseArgs } from "jsr:@std/cli/parse-args"
 import { which } from "jsr:@cross/fs@^0.1"
 import { args, spawn, exit } from "jsr:@cross/utils@^0.15"
+import { colorMe } from "jsr:@vef/color-me";
 
 import { Resolver } from "./resolver.ts"
+import { log } from "./log.ts"
 
 const { _: [pkg] } = parseArgs(args())
 
@@ -18,8 +20,7 @@ await resolver.ready
 const entryPoint = await resolver.resolve(String(pkg))
 await resolver.writeCache()
 
-console.log(`Running ${pkg}`)
-console.log(`$ node ${entryPoint}`)
+log("Running", colorMe.brightCyan(entryPoint), "from", colorMe.brightCyan(String(pkg)))
 
 const { code } = await spawn(
   [await which("node") ?? "node", String(entryPoint)],

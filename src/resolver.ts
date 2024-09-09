@@ -3,6 +3,8 @@ import { DirectoryTypes, dir } from "jsr:@cross/dir@^1"
 import { readFile, writeFile, exists, mktempdir, mkdir, which } from "jsr:@cross/fs@^0.1"
 import { spawn } from "jsr:@cross/utils@^0.15"
 
+import { log } from "./log.ts"
+
 const MAIN_LOCATIONS = [
   "mod.js",
   "main.js",
@@ -57,12 +59,11 @@ export class Resolver {
   async #install(pkg: string): Promise<string> {
     this.#assert_ready()
 
-    console.log("Creating tmp dir...")
+    log("[jsr-dlx] Creating tmp dir...")
     const installDir: string = await mktempdir("jsr-dlx-")
     this.cache[pkg] = installDir
   
-    console.log(`Installing ${pkg} in ${installDir}`)
-    console.log(`$ npx jsr install ${pkg}`)
+    log(`Installing ${pkg} in ${installDir}`)
 
     const { code } = await spawn(
       [await which("npx") ?? "npx", "jsr", "add", pkg],

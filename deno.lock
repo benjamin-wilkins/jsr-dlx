@@ -20,6 +20,8 @@
       "jsr:@std/path": "jsr:@std/path@1.0.4",
       "jsr:@std/path@0.213": "jsr:@std/path@0.213.1",
       "jsr:@std/path@^0.224.0": "jsr:@std/path@0.224.0",
+      "jsr:@vef/color-me": "jsr:@vef/color-me@1.0.3",
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:esbuild": "npm:esbuild@0.23.1"
     },
     "jsr": {
@@ -107,6 +109,9 @@
       },
       "@std/path@1.0.4": {
         "integrity": "48dd5d8389bcfcd619338a01bdf862cb7799933390146a54ae59356a0acc7105"
+      },
+      "@vef/color-me@1.0.3": {
+        "integrity": "d5cc64c4b15518f3a5e4f3acdc2ed7d8335b7773097d4c692210e8a2fd84e91c"
       }
     },
     "npm": {
@@ -204,6 +209,10 @@
       },
       "@esbuild/win32-x64@0.23.1": {
         "integrity": "sha512-BHpFFeslkWrXWyUPnbKm+xYYVYruCinGcftSBaa8zoF9hZO4BcSCFUvHVTtzpIY6YzUnYtuEhZ+C9iEXjxnasg==",
+        "dependencies": {}
+      },
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
         "dependencies": {}
       },
       "esbuild@0.23.1": {
