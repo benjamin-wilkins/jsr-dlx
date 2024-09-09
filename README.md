@@ -10,7 +10,8 @@ npx jsr-dlx [PACKAGE] [ARGS?]
 bunx --bun jsr-dlx [PACKAGE] [ARGS?]
 ```
 
-Essentially, `jsr-dlx` calls `npx jsr` to install the package to a temporary directory (the name
-of which is stored in the user's cache directory so that subsequent calls to the same package
-don't need to re-install every time) before searching for an entry point and running it through
-`node`.
+Essentially, `jsr-dlx` calls `npx jsr` or `bunx jsr` to install the package into a temporary
+directory, and holds a reference to it in the user's cache directory. After this, it tries to
+figure out the entry point of the package and run it using the same runtime it was called with.
+When `jsr-dlx` is called again, it checks the cache file and checks if the directory exists. If it
+does, `jsr-dlx` skips the install step.
