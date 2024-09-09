@@ -1,8 +1,8 @@
 #! /usr/bin/env node
 
 import { parseArgs } from "jsr:@std/cli/parse-args"
-import { which } from "jsr:@cross/fs"
-import { args, spawn, exit } from "jsr:@cross/utils"
+import { which } from "jsr:@cross/fs@^0.1"
+import { args, spawn, exit } from "jsr:@cross/utils@^0.15"
 
 import { Resolver } from "./resolver.ts"
 

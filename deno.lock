@@ -3,18 +3,19 @@
   "packages": {
     "specifiers": {
       "jsr:@cross/deepmerge@^1.0.0": "jsr:@cross/deepmerge@1.0.0",
-      "jsr:@cross/dir": "jsr:@cross/dir@1.1.0",
+      "jsr:@cross/dir@^1": "jsr:@cross/dir@1.1.0",
       "jsr:@cross/dir@^1.1.0": "jsr:@cross/dir@1.1.0",
       "jsr:@cross/env@^1.0.0": "jsr:@cross/env@1.0.2",
-      "jsr:@cross/fs": "jsr:@cross/fs@0.1.11",
-      "jsr:@cross/runtime": "jsr:@cross/runtime@1.1.0",
+      "jsr:@cross/fs@^0.1": "jsr:@cross/fs@0.1.11",
+      "jsr:@cross/fs@^0.1.11": "jsr:@cross/fs@0.1.11",
       "jsr:@cross/runtime@^1.0.0": "jsr:@cross/runtime@1.1.0",
+      "jsr:@cross/utils@^0.15": "jsr:@cross/utils@0.15.0",
       "jsr:@cross/utils@^0.7.0": "jsr:@cross/utils@0.7.1",
       "jsr:@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@0.10.3",
       "jsr:@std/assert@^0.213.1": "jsr:@std/assert@0.213.1",
       "jsr:@std/assert@^0.224.0": "jsr:@std/assert@0.224.0",
-      "jsr:@std/cli": "jsr:@std/cli@1.0.5",
       "jsr:@std/encoding@0.213": "jsr:@std/encoding@0.213.1",
+      "jsr:@std/json@^0.213.1": "jsr:@std/json@0.213.1",
       "jsr:@std/jsonc@0.213": "jsr:@std/jsonc@0.213.1",
       "jsr:@std/path": "jsr:@std/path@1.0.4",
       "jsr:@std/path@0.213": "jsr:@std/path@0.213.1",
@@ -52,6 +53,13 @@
       "@cross/runtime@1.1.0": {
         "integrity": "f35a3b768a9de125277329483b684062ffc9ee86f4449cb8b3d614adcad64ffb"
       },
+      "@cross/utils@0.15.0": {
+        "integrity": "e16f224f785a3c0938dfcfb7f6e2048eba2dad162c10bf1d23a91d84d9443595",
+        "dependencies": [
+          "jsr:@cross/fs@^0.1.11",
+          "jsr:@cross/runtime@^1.0.0"
+        ]
+      },
       "@cross/utils@0.7.1": {
         "integrity": "6cc50ad31b0904364188c43d10e3d4888d817a3d415528b014c27deb8a35564e",
         "dependencies": [
@@ -72,16 +80,17 @@
       "@std/assert@0.224.0": {
         "integrity": "8643233ec7aec38a940a8264a6e3eed9bfa44e7a71cc6b3c8874213ff401967f"
       },
-      "@std/cli@1.0.5": {
-        "integrity": "c93cce26ffd26f617c15a12874e1bfeabc90b1eee86017c9639093734c2bf587"
-      },
       "@std/encoding@0.213.1": {
         "integrity": "fcbb6928713dde941a18ca5db88ca1544d0755ec8fb20fe61e2dc8144b390c62"
+      },
+      "@std/json@0.213.1": {
+        "integrity": "f572b1de605d07c4a5602445dac54bfc51b1fb87a3710a17aed2608bfca54e68"
       },
       "@std/jsonc@0.213.1": {
         "integrity": "5578f21aa583b7eb7317eed077ffcde47b294f1056bdbb9aacec407758637bfe",
         "dependencies": [
-          "jsr:@std/assert@^0.213.1"
+          "jsr:@std/assert@^0.213.1",
+          "jsr:@std/json@^0.213.1"
         ]
       },
       "@std/path@0.213.1": {
@@ -228,22 +237,5 @@
       }
     }
   },
-  "remote": {
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/mod.ts": "dc4bfed0c3593c9ab8fea9fee87bb9fb431543bb50e289230ea723e91774f0c2",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/ansi.ts": "c5b619f02de368949f3d75a327f7c70e12a7de942f235891a6f76712c9ac21c1",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/args.ts": "89199ed10090ebb947bec0fed86d60c905ebcff2b97417afe3c77a6b51dd2c18",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/execpath.ts": "c753ba855655d040e2c855d30ad66d93bd109621eb0ffac7db428899dc2a0d43",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/exit.ts": "aa6efa46de9c117b3597a2f3ec22add68c82250be858fe02b8cf8a7612062abc",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/objectManip.ts": "a9e076fdd014415caf94b5e1f0af59dd86da73da4ccc3065254e983a28af3310",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/pid.ts": "62133bdea5be3a9ab279406954e0e7db1d254f8361588ef1e8eb9b12e52d127d",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/spawn.ts": "9a7c7c37b4edb2cdd9b56c522989648517b8c778feb192720f0d8b9774e4b960",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/stdio.ts": "34b109dc84ac0c1bcb8249cfa702433588258026f243a03a9d0111e54f635e73",
-    "https://raw.githubusercontent.com/benjamin-wilkins/cross-utils/spawn-stdio/utils/sysinfo.ts": "e41261f4c9ffe797ec95550779b1909a7907fc38848af0cdc6057aac86f5633e"
-  },
-  "workspace": {
-    "dependencies": [
-      "jsr:@cross/fs",
-      "jsr:@cross/runtime"
-    ]
-  }
+  "remote": {}
 }

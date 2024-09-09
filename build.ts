@@ -3,9 +3,7 @@ import { denoPlugins } from "jsr:@luca/esbuild-deno-loader"
 
 await Promise.all([
   build({
-    plugins: [...denoPlugins({
-      importMapURL: import.meta.resolve("./deno.json")
-    })],
+    plugins: [...denoPlugins()],
     entryPoints: ["src/mod.ts"],
     outdir: "dist",
     bundle: true,

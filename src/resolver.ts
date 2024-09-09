@@ -1,9 +1,7 @@
 import { join, join as joinPath } from "jsr:@std/path"
-import { DirectoryTypes, dir } from "jsr:@cross/dir"
-import { readFile, writeFile, exists, mktempdir, mkdir, which } from "jsr:@cross/fs"
-
-// TODO: replace with JSR package @cross/utils
-import { spawn } from "jsr:@cross/utils"
+import { DirectoryTypes, dir } from "jsr:@cross/dir@^1"
+import { readFile, writeFile, exists, mktempdir, mkdir, which } from "jsr:@cross/fs@^0.1"
+import { spawn } from "jsr:@cross/utils@^0.15"
 
 const MAIN_LOCATIONS = [
   "mod.js",
