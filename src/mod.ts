@@ -1,4 +1,4 @@
-// npx esbuild ./src/main.ts --bundle --platform=node --format=esm --external:@std/* --external:@cross/* | node --input-type=module - [PACKAGE]
+#! /usr/bin/env node
 
 import { parseArgs } from "jsr:@std/cli/parse-args"
 import { which } from "jsr:@cross/fs"

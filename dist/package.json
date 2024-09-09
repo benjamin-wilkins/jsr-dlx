@@ -1,8 +1,8 @@
 {
   "name": "jsr-dlx",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
-  "bin": "node ./mod.js",
+  "bin": "./mod.js",
   "author": "Benjamin Wilkins",
   "license": "MIT",
   "keywords": ["JSR", "cli"],
