@@ -21,7 +21,7 @@ await resolver.ready
 const entryPoint = await resolver.resolve(String(pkg))
 await resolver.writeCache()
 
-log("Running", colorMe.brightCyan(entryPoint), "from", colorMe.brightCyan(String(pkg)))
+log("Running", colorMe.green(entryPoint))
 
 await spawn(
   [execPath(), String(entryPoint), ...childArgs.map(String)],

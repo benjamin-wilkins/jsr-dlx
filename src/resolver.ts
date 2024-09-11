@@ -1,8 +1,27 @@
-import { join, join as joinPath } from "jsr:@std/path"
+import { join as joinPath } from "jsr:@std/path"
 import { DirectoryTypes, dir } from "jsr:@cross/dir@^1"
-import { readFile, writeFile, exists, mktempdir, mkdir, which } from "jsr:@cross/fs@^0.1"
 import { getCurrentRuntime, Runtime } from "jsr:@cross/runtime@1"
 import { spawn } from "jsr:@cross/utils@^0.15"
+import { colorMe } from "jsr:@vef/color-me@1";
+
+import {
+  readFile,
+  writeFile,
+  exists,
+  mktempdir,
+  mkdir,
+  which
+} from "jsr:@cross/fs@^0.1"
+
+import {
+  maxSatisfying,
+  parse as parseVersion,
+  format as formatVersion,
+  type SemVer,
+  parseRange,
+  formatRange,
+  type Range
+} from "jsr:@std/semver"
 
 import { log } from "./log.ts"
 
@@ -15,17 +34,25 @@ const MAIN_LOCATIONS = [
   joinPath("src", "main.js"),
 ]
 
+async function getLatest(pkgName: string): Promise<Range> {
+  log("Getting latest version for", colorMe.brightCyan(pkgName))
+
+  const response = await fetch(`https://jsr.io/${pkgName}/meta.json`)
+  return parseRange(JSON.parse(await response.text()).latest)
+}
+
+async function getInstalled(installDir: string, pkgName: string): Promise<SemVer> {
+  const packageJSON = joinPath(installDir, "node_modules", pkgName, "package.json")
+
+  return parseVersion(JSON.parse(await readFile(packageJSON, { encoding: "utf-8" })).version)
+}
+
 export class Resolver {
   constructor() {
-    let resolve: () => void
-    ({ promise: this.ready, resolve } = Promise.withResolvers())
-
-    this.#constructor_async()
-    .then(() => this.#is_ready = true)
-    .then(resolve)
+    this.ready = this.#constructor_async().then(() => {this.#is_ready = true})
   }
 
-  async #constructor_async() {
+  async #constructor_async(): Promise<void> {
     const cacheDir = joinPath(await dir(DirectoryTypes.cache), "jsr-dlx")
     this.cacheFile = joinPath(cacheDir, "cache.json")
     
@@ -40,37 +67,39 @@ export class Resolver {
   ready: Promise<void>
   #is_ready: boolean = false
 
-  #assert_ready(): asserts this is { cacheFile: string, cache: Record<string, string> } {
+  #assert_ready(): asserts this is { cacheFile: string, cache: Record<string, Record<string, string>> } {
     if (!this.#is_ready) throw new TypeError("You must await Resolver.ready before using it.")
   }
 
-  async #findExisting(pkg: string): Promise<string | void> {
+  async #findExisting(pkgName: string, pkgVersion: Range): Promise<string | void> {
     this.#assert_ready()
 
-    if (!(pkg in this.cache)) return
+    if (!(pkgName in this.cache)) return
 
-    if (!(await exists(this.cache[pkg]))) {
-      delete this.cache[pkg]
+    const resolvedPkgVersion = maxSatisfying(Object.keys(this.cache[pkgName]).map(parseVersion), pkgVersion)
+    if (!resolvedPkgVersion) return
+
+    if (!(await exists(this.cache[pkgName][formatVersion(resolvedPkgVersion)]))) {
+      delete this.cache[pkgName]
       return
     }
 
-    return this.cache[pkg]
+    return this.cache[pkgName][formatVersion(resolvedPkgVersion)]
   }
 
-  async #install(pkg: string): Promise<string> {
+  async #install(pkgName: string, pkgVersion: Range): Promise<string> {
     this.#assert_ready()
 
     log("[jsr-dlx] Creating tmp dir...")
     const installDir: string = await mktempdir("jsr-dlx-")
-    this.cache[pkg] = installDir
+
+    if (!this.cache[pkgName]) this.cache[pkgName] = {}
   
-    log(`Installing ${pkg} in ${installDir}`)
+    log("Installing", colorMe.brightCyan(pkgName), "in", colorMe.green(installDir))
 
     const command: string[] = getCurrentRuntime() === Runtime.Bun
-    ? [await which("bunx") ?? "bunx", "jsr", "add", pkg]
-    : [await which("npx") ?? "npx", "jsr", "add", pkg]
-
-    console.log(command)
+    ? [await which("bunx") ?? "bunx", "jsr", "add", `${pkgName}@${formatRange(pkgVersion)}`]
+    : [await which("npx") ?? "npx", "jsr", "add", `${pkgName}@${formatRange(pkgVersion)}`]
 
     const { code } = await spawn(
       command,
@@ -81,17 +110,32 @@ export class Resolver {
 
     if (code != 0) throw new Error(`A critical error occured. There is likely more information above.`)
 
+    const installedVersion: string = formatVersion(await getInstalled(installDir, pkgName))
+    log("Installed", colorMe.brightCyan(`${pkgName}@${installedVersion}`))
+
+    this.cache[pkgName][installedVersion] = installDir
     return installDir
   }
 
   async resolve(pkg: string): Promise<string> {
     this.#assert_ready()
 
-    const installDir = await this.#findExisting(pkg) ?? await this.#install(pkg)
-    const pkgDir = joinPath(installDir, "node_modules", ...pkg.split("/"))
+    const pkgName: string = "@" + pkg.split("@")[1]
+    const pkgVersionString: string = pkg.split("@")[2] ?? "*"
+
+    let pkgVersion: Range
+
+    if (pkgVersionString === "latest") {
+      pkgVersion = await getLatest(pkgName)
+    } else {
+      pkgVersion = parseRange(pkgVersionString)
+    }
+
+    const installDir = await this.#findExisting(pkgName, pkgVersion) ?? await this.#install(pkgName, pkgVersion)
+    const pkgDir = joinPath(installDir, "node_modules", ...pkgName.split("/"))
 
     for (const loc of MAIN_LOCATIONS) {
-      const entryPoint = join(pkgDir, loc)
+      const entryPoint = joinPath(pkgDir, loc)
       if (await exists(entryPoint)) {
         return entryPoint
       }
@@ -107,5 +151,5 @@ export class Resolver {
   }
 
   cacheFile?: string
-  cache?: Record<string, string>
+  cache?: Record<string, Record<string, string>>
 }

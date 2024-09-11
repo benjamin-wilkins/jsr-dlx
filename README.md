@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/npm/v/jsr-dlx)](https://npmjs.com/package/jsr-dlx)
 
-A basic utility for runnning JSR packages under Node on the command line. Based on a combination
+A basic utility for runnning JSR packages under Node or Bun on the command line. Based on both
 of `yarn dlx` and `deno run`.
 
 ```sh

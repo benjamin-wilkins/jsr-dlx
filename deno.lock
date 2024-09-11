@@ -21,6 +21,7 @@
       "jsr:@std/path": "jsr:@std/path@1.0.4",
       "jsr:@std/path@0.213": "jsr:@std/path@0.213.1",
       "jsr:@std/path@^0.224.0": "jsr:@std/path@0.224.0",
+      "jsr:@std/semver": "jsr:@std/semver@1.0.3",
       "jsr:@vef/color-me": "jsr:@vef/color-me@1.0.3",
       "jsr:@vef/color-me@1": "jsr:@vef/color-me@1.0.3",
       "npm:@types/node": "npm:@types/node@18.16.19",
@@ -117,6 +118,9 @@
       },
       "@std/path@1.0.4": {
         "integrity": "48dd5d8389bcfcd619338a01bdf862cb7799933390146a54ae59356a0acc7105"
+      },
+      "@std/semver@1.0.3": {
+        "integrity": "7c139c6076a080eeaa4252c78b95ca5302818d7eafab0470d34cafd9930c13c8"
       },
       "@vef/color-me@1.0.3": {
         "integrity": "d5cc64c4b15518f3a5e4f3acdc2ed7d8335b7773097d4c692210e8a2fd84e91c"
